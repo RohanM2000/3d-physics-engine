@@ -8,6 +8,8 @@ There will be an emphasis on making sure that this engine is exportable and othe
 
 This project will solely rely on 2d canvas at the moment, but may include other libraries to help with processing speed or graphics rendering. Natively javascript is not efficient as a langauage, and other creators have made rust/c++ code that is compileable with webassembly modules and able to be interacted with in javascript at a fraction of the runtime. Self made WASM may be included in future iterations of this project.
 
+https://wireframe.cc/PWX8hP
+
 TIMELINE:
 
 Friday/Saturday: Implement a moveable camera with inefficient multiplication and transformation methods. If time permits research into quaternions to make the transformations efficient.
