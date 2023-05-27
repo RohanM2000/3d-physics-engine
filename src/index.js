@@ -3,6 +3,9 @@ import render from "./scripts/render.js"
 import Vertex from "./scripts/vertex.js"
 import Scene from "./scripts/scene.js"
 import Camera from "./scripts/camera.js"
+import Background from "./scripts/background.js"
+import { renderBackground } from "./scripts/render_background.js"
+import Floor from "./scripts/floor.js"
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.createElement("canvas");
@@ -12,17 +15,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     const ctx = canvas.getContext("2d");
     
-    const cube = new Cube(new Vertex(100,400,0), 100);
-    const cube2 = new Cube(new Vertex(-100,400,0), 100);
-
+    const cube = new Cube(new Vertex(100,700,-100), 100);
+    const cube2 = new Cube(new Vertex(-100,700,-200), 100);
+    const background = new Background();
+    const floor = new Floor();
     // const cube2 = new Cube(new Vertex(100,100,100), 100);
 
     // cube.relRotateX(Math.PI/4);
     // render([cube], ctx,  300, 300);
     const camera = new Camera(new Vertex(0, 0, 0), 0);
-    const scene = new Scene(camera, [cube, cube2]);
+    const scene = new Scene(camera, [cube, cube2, floor], background);
     function animate () {
-        // requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
         ctx.clearRect(0, 0, 600, 600);
         // cube.relRotateX(0.1);
@@ -30,7 +34,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // cube.relRotateZ(0.1);
         // scene.turn(0.1);
         // cube.absRotateY(0.1);
-        render([cube, cube2], ctx, 300, 300, 5000);
+        // renderBackground(background, ctx, 300, 300, 10000);
+        cube.fall(scene.z);
+        if (cube.checkCollision(floor)) {
+            cube.resolveCollisionZ(floor);
+        }
+        render([cube, cube2, floor], ctx, 300, 300, 5000);
     }
     addEventListener("keydown", (event)=>{
         // console.log(cube.center);
@@ -74,7 +83,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if (event.key === "f") {
             scene.move(0, -10, 0);
         }
-        animate();
+        // animate();
     })
 
     animate();

@@ -1,6 +1,9 @@
 import Vertex from "./vertex.js"
 import Objects from "./objects.js"
+import * as CONSTANTS from "./constants.js"
 export default function Cube (center, size) {
+    this.velocity = new Vertex(0, 0, 0);
+    this.size = size;
     const d = size / 2;
     // this.relVertices = [
     //     new Vertex(-d, -d, -d),
@@ -36,3 +39,13 @@ export default function Cube (center, size) {
 function Surrogate () {};
 Surrogate.prototype = Objects.prototype;
 Cube.prototype = new Surrogate();
+
+Cube.prototype.fall = function(zDir) {
+    // this.velocity.z -= this.acceleration;
+    this.velocity.x -= zDir.x * CONSTANTS.GRAVITY;
+    this.velocity.y -= zDir.y * CONSTANTS.GRAVITY;
+    this.velocity.z -= zDir.z * CONSTANTS.GRAVITY;
+
+    this.move(this.velocity.x, this.velocity.y, this.velocity.z);
+}
+

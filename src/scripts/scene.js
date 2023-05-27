@@ -1,9 +1,14 @@
 import Objects from "./objects.js"
 import Camera from "./camera.js"
+import Vertex from "./vertex.js"
 
-export default function Scene (camera, objects) {
+export default function Scene (camera, objects, background) {
     this.camera = camera;
     this.objects = objects;
+    this.background = background;
+    this.x = new Vertex(1,0,0);
+    this.y = new Vertex(0,1,0);
+    this.z = new Vertex(0,0,1);
 }
 
 Scene.prototype.turn = function (zTheta) {
@@ -12,6 +17,10 @@ Scene.prototype.turn = function (zTheta) {
         const element = this.objects[i];
         element.absRotateZ(-zTheta);
     }
+    this.background.absRotateZ(-zTheta);
+    this.x.rotateZ(-zTheta);
+    this.y.rotateZ(-zTheta);
+    this.z.rotateZ(-zTheta);
 }
 
 Scene.prototype.dip = function (zPhi) {
@@ -20,6 +29,10 @@ Scene.prototype.dip = function (zPhi) {
         const element = this.objects[i];
         element.absRotateX(zPhi);
     }
+    this.background.absRotateX(zPhi);
+    this.x.rotateX(zPhi);
+    this.y.rotateX(zPhi);
+    this.z.rotateX(zPhi);
 }
 
 Scene.prototype.screw = function (zOmega) {
@@ -28,6 +41,10 @@ Scene.prototype.screw = function (zOmega) {
         const element = this.objects[i];
         element.absRotateY(-zOmega);
     }
+    this.background.absRotateY(-zOmega);
+    this.x.rotateY(-zOmega);
+    this.y.rotateY(-zOmega);
+    this.z.rotateY(-zOmega);
 }
 
 Scene.prototype.move = function (x, y, z) {
@@ -36,4 +53,5 @@ Scene.prototype.move = function (x, y, z) {
         const element = this.objects[i];
         element.move(-x, -y, -z);
     }
+    this.background.move(-x, -y, -z);
 }
