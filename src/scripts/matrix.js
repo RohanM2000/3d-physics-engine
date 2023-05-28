@@ -27,3 +27,14 @@ Matrix.prototype.simplifyZeros = function () {
         }
     }
 }
+
+Matrix.prototype.dupe = function() {
+    const mat = [];
+    // console.log(this);
+    for (let i = 0; i < this.lengthI; i++) {
+        // console.log("getting to this point!")
+        mat.push(this.values[i].slice());
+        // console.log(mat);
+    }
+    return new Matrix(mat);
+}

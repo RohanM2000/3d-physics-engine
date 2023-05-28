@@ -59,3 +59,18 @@ Vertex.prototype.rotateZ = function (theta) {
     this.y = newPos.values[1][0];
     this.z = newPos.values[2][0];
 }
+
+Vertex.prototype.multiplyBy = function (matrix) {
+    const newVals = matrix.multiply(new Matrix([
+        [this.x],
+        [this.y],
+        [this.z]
+    ]));
+    // console.log("getting to this point");
+    // console.log(newVals)
+    return new Vertex(newVals.values[0][0], newVals.values[1][0], newVals.values[2][0]);
+}
+
+Vertex.prototype.dupe = function () {
+    return new Matrix(this.x, this.y, this.z);
+}

@@ -6,6 +6,7 @@ import Camera from "./scripts/camera.js"
 import Background from "./scripts/background.js"
 import { renderBackground } from "./scripts/render_background.js"
 import Floor from "./scripts/floor.js"
+import Matrix from "./scripts/matrix.js"
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.createElement("canvas");
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const camera = new Camera(new Vertex(0, 0, 0), 0);
     const scene = new Scene(camera, [cube, cube2, floor], background);
     function animate () {
-        requestAnimationFrame(animate);
+        // requestAnimationFrame(animate);
 
         ctx.clearRect(0, 0, 600, 600);
         // cube.relRotateX(0.1);
@@ -83,7 +84,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if (event.key === "f") {
             scene.move(0, -10, 0);
         }
-        // animate();
+        animate();
+        // console.log(cube.center, cube.rotations.multiply(new Matrix([
+        //     [cube.staticCenter.x],
+        //     [cube.staticCenter.y],
+        //     [cube.staticCenter.z]
+        // ])), cube.rotate().center, cube.center.multiplyBy(cube.rotations));
+        console.log(cube.faces, cube.rotate().faces, "faces");
+        console.log(cube.vertices, cube.rotate().vertices, "faces");
     })
 
     animate();

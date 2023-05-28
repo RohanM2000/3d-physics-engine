@@ -33,12 +33,19 @@ function painterQuickSort (objects) {
 
 
 export default function render(objects, ctx, distX, distY, d) {
-    const sortedObjects = painterQuickSort(objects);
+    const rotatedObjects = [];
+    for (let i = 0; i < objects.length; i++) {
+        rotatedObjects.push(objects[i].rotate());
+    }
+    // console.log(objects, rotatedObjects);
+    const sortedObjects = painterQuickSort(rotatedObjects);
+    // console.log(sortedObjects);
     for (let i = 0; i < sortedObjects.length; i++) {
         // const sortedFaces = painterQuickSort(sortedObjects[i].faces);
         if (sortedObjects[i].center.y > 100) {
 
             const sortedFaces = sortedObjects[i].faces;
+            // console.log(sortedFaces);
             for (let j = 0; j < sortedFaces.length; j++) {
                 const face = sortedFaces[j];
                 const avg = [0, 0];

@@ -15,9 +15,10 @@ Scene.prototype.turn = function (zTheta) {
     this.camera.turn(zTheta);
     for (let i = 0; i < this.objects.length; i++) {
         const element = this.objects[i];
-        element.absRotateZ(-zTheta);
+        // element.absRotateZ(-zTheta);
+        element.rotateZ(-zTheta);
     }
-    this.background.absRotateZ(-zTheta);
+    // this.background.absRotateZ(-zTheta);
     this.x.rotateZ(-zTheta);
     this.y.rotateZ(-zTheta);
     this.z.rotateZ(-zTheta);
@@ -27,9 +28,10 @@ Scene.prototype.dip = function (zPhi) {
     this.camera.dip(zPhi)
     for (let i = 0; i < this.objects.length; i++) {
         const element = this.objects[i];
-        element.absRotateX(zPhi);
+        // element.absRotateX(zPhi);
+        element.rotateX(zPhi);
     }
-    this.background.absRotateX(zPhi);
+    // this.background.absRotateX(zPhi);
     this.x.rotateX(zPhi);
     this.y.rotateX(zPhi);
     this.z.rotateX(zPhi);
@@ -39,9 +41,10 @@ Scene.prototype.screw = function (zOmega) {
     this.camera.dip(zOmega)
     for (let i = 0; i < this.objects.length; i++) {
         const element = this.objects[i];
-        element.absRotateY(-zOmega);
+        // element.absRotateY(-zOmega);
+        element.rotateY(-zOmega);
     }
-    this.background.absRotateY(-zOmega);
+    // this.background.absRotateY(-zOmega);
     this.x.rotateY(-zOmega);
     this.y.rotateY(-zOmega);
     this.z.rotateY(-zOmega);
@@ -53,5 +56,5 @@ Scene.prototype.move = function (x, y, z) {
         const element = this.objects[i];
         element.move(-x, -y, -z);
     }
-    this.background.move(-x, -y, -z);
+    // this.background.move(-x, -y, -z);
 }

@@ -25,8 +25,9 @@ Objects.prototype.absRotateX = function (theta) {
     // this.center.x = newCent.values[0][0];
     // this.center.y = newCent.values[1][0];
     // this.center.z = newCent.values[2][0];
+    this.rotateX(theta);
     this.center.rotateX(theta);
-    this.velocity.rotateX(theta);
+    // this.velocity.rotateX(theta);
     for (let i = 0; i < this.vertices.length; i++) {
         // const oldPosMat = new Matrix([
         //     [this.vertices[i].x],
@@ -53,8 +54,9 @@ Objects.prototype.absRotateY = function (theta) {
     // this.center.x = newCent.values[0][0];
     // this.center.y = newCent.values[1][0];
     // this.center.z = newCent.values[2][0];
+    this.rotateY(theta);
     this.center.rotateY(theta);
-    this.velocity.rotateY(theta);
+    // this.velocity.rotateY(theta);
     for (let i = 0; i < this.vertices.length; i++) {
         // const oldPosMat = new Matrix([
         //     [this.vertices[i].x],
@@ -81,8 +83,9 @@ Objects.prototype.absRotateZ = function (theta) {
     // this.center.x = newCent.values[0][0];
     // this.center.y = newCent.values[1][0];
     // this.center.z = newCent.values[2][0];
+    this.rotateZ(theta);
     this.center.rotateZ(theta);
-    this.velocity.rotateZ(theta);
+    // this.velocity.rotateZ(theta);
     for (let i = 0; i < this.vertices.length; i++) {
         // const oldPosMat = new Matrix([
         //     [this.vertices[i].x],
@@ -146,7 +149,7 @@ Objects.prototype.checkCollision = function(obj) {
     //     return "Z";
     // }
     // return false;
-    
+
 }
 
 Objects.prototype.resolveCollisionZ = function(obj) {
@@ -159,4 +162,31 @@ Objects.prototype.resolveCollisionZ = function(obj) {
         // console.log(obj);
         // this.fixed = true;
     }
+}
+
+Objects.prototype.rotateX = function (theta) {
+    const rotMatrix = ROTATIONS.rotationX(theta);
+    this.rotations = rotMatrix.multiply(this.rotations);
+}
+
+Objects.prototype.rotateY = function (theta) {
+    const rotMatrix = ROTATIONS.rotationY(theta);
+    this.rotations = rotMatrix.multiply(this.rotations);
+}
+
+Objects.prototype.rotateZ = function (theta) {
+    const rotMatrix = ROTATIONS.rotationZ(theta);
+    // console.log("rotation matrix", rotMatrix, "current rotations", this.rotations);
+    this.rotations = rotMatrix.multiply(this.rotations);
+}
+
+Objects.prototype.rotate = function () {
+    const dupe = this.dupe();
+    dupe.center = dupe.center.multiplyBy(dupe.rotations);
+    for (let i = 0; i < dupe.vertices.length; i++) {
+        // console.log("doing this!")
+        dupe.vertices[i] = dupe.vertices[i].multiplyBy(dupe.rotations);
+    }
+    dupe.fixFaces();
+    return dupe;
 }
