@@ -1,4 +1,5 @@
 import VertexTwo from "./vertextwo.js"
+import Floor from "./floor.js"
 function OrthoProject (M) {
     return new VertexTwo(M.x, M.z);
 }
@@ -38,9 +39,13 @@ export default function render(objects, ctx, distX, distY, d) {
         rotatedObjects.push(objects[i].rotate());
     }
     // console.log(objects, rotatedObjects);
+    // console.log(rotatedObjects[2]);
     const sortedObjects = painterQuickSort(rotatedObjects);
     // console.log(sortedObjects);
     for (let i = 0; i < sortedObjects.length; i++) {
+        // if (sortedObjects[i] instanceof Floor) {
+        //     console.log(sortedObjects[i]);
+        // }
         // const sortedFaces = painterQuickSort(sortedObjects[i].faces);
         if (sortedObjects[i].center.y > 100) {
 

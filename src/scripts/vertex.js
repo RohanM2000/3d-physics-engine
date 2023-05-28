@@ -72,5 +72,5 @@ Vertex.prototype.multiplyBy = function (matrix) {
 }
 
 Vertex.prototype.dupe = function () {
-    return new Matrix(this.x, this.y, this.z);
+    return new Vertex(this.x, this.y, this.z);
 }

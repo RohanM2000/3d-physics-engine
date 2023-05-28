@@ -36,10 +36,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // scene.turn(0.1);
         // cube.absRotateY(0.1);
         // renderBackground(background, ctx, 300, 300, 10000);
-        cube.fall(scene.z);
-        if (cube.checkCollision(floor)) {
-            cube.resolveCollisionZ(floor);
-        }
+        // cube.fall(scene.z);
+        // if (cube.checkCollision(floor)) {
+        //     cube.resolveCollisionZ(floor);
+        // }
         render([cube, cube2, floor], ctx, 300, 300, 5000);
     }
     addEventListener("keydown", (event)=>{
@@ -90,8 +90,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         //     [cube.staticCenter.y],
         //     [cube.staticCenter.z]
         // ])), cube.rotate().center, cube.center.multiplyBy(cube.rotations));
-        console.log(cube.faces, cube.rotate().faces, "faces");
-        console.log(cube.vertices, cube.rotate().vertices, "faces");
+        // console.log(cube.faces, cube.rotate().faces, "faces");
+        // console.log(cube.vertices, cube.rotate().vertices, "faces");
+        // console.log(floor);
     })
 
     animate();

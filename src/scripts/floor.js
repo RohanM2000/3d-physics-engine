@@ -31,14 +31,19 @@ Floor.prototype = new Surrogate();
 
 Floor.prototype.dupe = function () {
     const result = new Floor();
-    // result.center = this.center.dupe();
+    result.center = this.center.dupe();
+    // console.log(this.center.dupe());
     result.rotations = this.rotations.dupe();
-    for (let i = 0; i < result.vertices; i++) {
+    for (let i = 0; i < result.vertices.length; i++) {
         result.vertices[i] = this.vertices[i].dupe();
     }
+    // console.log(result);
+    this.fixFaces();
     return result;
 }
 
 Floor.prototype.fixFaces = function () {
-    
+    this.faces = [
+        [this.vertices[0], this.vertices[1], this.vertices[2], this.vertices[3], "black"]
+    ];
 }

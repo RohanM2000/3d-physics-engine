@@ -11,6 +11,9 @@ Objects.prototype.move = function (x, y, z) {
         const vertex = this.vertices[i];
         vertex.move(x, y, z);
     }
+    // if (this instanceof Floor) {
+    //     console.log(this);
+    // }
 }
 
 
