@@ -7,6 +7,7 @@ import Background from "./scripts/background.js"
 import { renderBackground } from "./scripts/render_background.js"
 import Floor from "./scripts/floor.js"
 import Matrix from "./scripts/matrix.js"
+import Pyramid from "./scripts/pyramid.js"
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.createElement("canvas");
@@ -18,14 +19,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     const cube = new Cube(new Vertex(100,700,-100), 100);
     const cube2 = new Cube(new Vertex(-100,700,-200), 100);
+    const pyramid = new Pyramid(new Vertex(-100, 700, 400), 100);
+    const cube3 = new Cube(new Vertex(100, 700, 100), 100);
     const background = new Background();
     const floor = new Floor();
+    const floor2 = new Floor();
+    floor2.move(0, 300, 0);
+    const floor3 = new Floor();
+    floor3.move(0, 600, 0);
     // const cube2 = new Cube(new Vertex(100,100,100), 100);
 
     // cube.relRotateX(Math.PI/4);
     // render([cube], ctx,  300, 300);
     const camera = new Camera(new Vertex(0, 0, 0), 0);
-    const scene = new Scene(camera, [cube, cube2, floor], background);
+    const scene = new Scene(camera, [cube, cube2, cube3, pyramid, floor, floor2, floor3], background);
     function animate () {
         // requestAnimationFrame(animate);
 
@@ -36,11 +43,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // scene.turn(0.1);
         // cube.absRotateY(0.1);
         // renderBackground(background, ctx, 300, 300, 10000);
-        // cube.fall(scene.z);
-        // if (cube.checkCollision(floor)) {
-        //     cube.resolveCollisionZ(floor);
-        // }
-        render([cube, cube2, floor], ctx, 300, 300, 5000);
+        // cube.fall();
+        // cube3.fall();
+        scene.fall();
+        render([floor, floor2, floor3], ctx, 300, 300, 200);
+        render([cube, cube2, cube3, pyramid], ctx, 300, 300, 200);
     }
     addEventListener("keydown", (event)=>{
         // console.log(cube.center);
@@ -84,6 +91,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if (event.key === "f") {
             scene.move(0, -10, 0);
         }
+        if (event.key === "o") {
+            scene.jump();
+        }
+        // console.log(cube3.rotate(), cube.rotate());
+
         animate();
         // console.log(cube.center, cube.rotations.multiply(new Matrix([
         //     [cube.staticCenter.x],

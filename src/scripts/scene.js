@@ -58,3 +58,23 @@ Scene.prototype.move = function (x, y, z) {
     }
     // this.background.move(-x, -y, -z);
 }
+
+Scene.prototype.fall = function () {
+    for (let i = 0; i < this.objects.length; i++) {
+        const obj = this.objects[i];
+        obj.fall();
+    }
+    for (let i = 0; i < this.objects.length - 1; i++) {
+        for (let j = i+1; j < this.objects.length; j++) {
+            if (this.objects[i].checkCollision(this.objects[j])) {
+                this.objects[i].resolveCollisionZ(this.objects[j]);
+            }
+        }
+    }
+}
+
+Scene.prototype.jump = function () {
+    for (let i = 0; i < this.objects.length; i++) {
+        this.objects[i].jump();
+    }
+}

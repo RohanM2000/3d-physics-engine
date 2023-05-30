@@ -5,7 +5,7 @@ function OrthoProject (M) {
 }
 
 function ProtoProject (M, d) {
-    return new VertexTwo(0.1 * d * M.x / M.y, 0.1 * d * M.z / M.y);
+    return new VertexTwo(d * M.x / (M.y + d),d * M.z / (M.y + d));
 }
 
 function painterQuickSort (objects) {
@@ -15,14 +15,35 @@ function painterQuickSort (objects) {
     const left = [];
     const right = [];
     const ob = objects[0];
+    // let tempMin = ob.vertices[0].y;
+    // for (let i = 1; i < ob.vertices.length; i++) {
+    //     if (ob.vertices[i] < tempMin) {
+    //         tempMin = ob.vertices[i];
+    //     }
+    // }
     const mid = [ob];
     for (let i = 1; i < objects.length; i++) {
         const element = objects[i];
         if (element.center.y < ob.center.y) {
             right.push(element);
+        // } else if (element.center.y > ob.center.y){
         } else {
             left.push(element);
         }
+        // } else {
+        //     let potentialMin = element.vertices[0];
+        //     for (let j = 0; j < element.vertices.length; j++) {
+        //         if (element.vertices[j] < potentialMin) {
+        //             potentialMin = element.vertices[j];
+        //         }
+        //     }
+            
+        //     if (potentialMin < tempMin) {
+        //         right.push(element);
+        //     } else {
+        //         left.push(element);
+        //     }
+        // }
     }
     const sortedLeft = painterQuickSort(left);
     const sortedRight = painterQuickSort(right);
@@ -40,6 +61,7 @@ export default function render(objects, ctx, distX, distY, d) {
     }
     // console.log(objects, rotatedObjects);
     // console.log(rotatedObjects[2]);
+    // console.log(objects[2], rotatedObjects[2]);
     const sortedObjects = painterQuickSort(rotatedObjects);
     // console.log(sortedObjects);
     for (let i = 0; i < sortedObjects.length; i++) {

@@ -2,7 +2,7 @@ import Vertex from "./vertex.js"
 import Objects from "./objects.js"
 import Matrix from "./matrix.js"
 import * as CONSTANTS from "./constants.js"
-export default function Cube (center, size) {
+export default function Pyramid (center, size) {
     this.velocity = new Vertex(0, 0, 0);
     this.acceleration = new Vertex(0, 0, -CONSTANTS.GRAVITY);
     this.size = size;
@@ -27,28 +27,24 @@ export default function Cube (center, size) {
     this.vertices = [
         new Vertex(center.x - d, center.y - d, center.z - d),
         new Vertex(center.x + d, center.y - d, center.z - d),
-        new Vertex(center.x + d, center.y - d, center.z + d),
-        new Vertex(center.x - d, center.y - d, center.z + d),
         new Vertex(center.x + d, center.y + d, center.z - d),
         new Vertex(center.x - d, center.y + d, center.z - d),
-        new Vertex(center.x - d, center.y + d, center.z + d),
-        new Vertex(center.x + d, center.y + d, center.z + d)
+        new Vertex(center.x, center.y, center.z + d)
     ];
     this.faces = [
-        [this.vertices[0], this.vertices[1], this.vertices[2], this.vertices[3], "red"],
-        [this.vertices[4], this.vertices[5], this.vertices[6], this.vertices[7], "blue"],
-        [this.vertices[1], this.vertices[4], this.vertices[7], this.vertices[2], "green"],
-        [this.vertices[5], this.vertices[0], this.vertices[3], this.vertices[6], "orange"],
-        [this.vertices[5], this.vertices[4], this.vertices[1], this.vertices[0], "gray"],
-        [this.vertices[3], this.vertices[2], this.vertices[7], this.vertices[6], "purple"]
+        [this.vertices[0], this.vertices[3], this.vertices[2], this.vertices[1], "red"],
+        [this.vertices[0], this.vertices[1], this.vertices[4], "blue"],
+        [this.vertices[1], this.vertices[2], this.vertices[4], "green"],
+        [this.vertices[2], this.vertices[3], this.vertices[4], "orange"],
+        [this.vertices[0], this.vertices[4], this.vertices[3], "gray"]
     ];
 }
 
 function Surrogate () {};
 Surrogate.prototype = Objects.prototype;
-Cube.prototype = new Surrogate();
+Pyramid.prototype = new Surrogate();
 
-Cube.prototype.fall = function() {
+Pyramid.prototype.fall = function() {
     this.velocity.move(this.acceleration.x, this.acceleration.y, this.acceleration.z);
     // this.velocity.x -= zDir.x * CONSTANTS.GRAVITY;
     // this.velocity.y -= zDir.y * CONSTANTS.GRAVITY;
@@ -57,8 +53,8 @@ Cube.prototype.fall = function() {
     this.move(this.velocity.x, this.velocity.y, this.velocity.z);
 }
 
-Cube.prototype.dupe = function() {
-    const result = new Cube(this.center, this.size);
+Pyramid.prototype.dupe = function() {
+    const result = new Pyramid(this.center, this.size);
     result.rotations = this.rotations.dupe();
     for (let i = 0; i < 0; i++) {
         result.vertices[i] = this.vertices[i].dupe();
@@ -74,13 +70,12 @@ Cube.prototype.dupe = function() {
     return result;
 }
 
-Cube.prototype.fixFaces = function() {
+Pyramid.prototype.fixFaces = function() {
     this.faces = [
-        [this.vertices[0], this.vertices[1], this.vertices[2], this.vertices[3], "red"],
-        [this.vertices[4], this.vertices[5], this.vertices[6], this.vertices[7], "blue"],
-        [this.vertices[1], this.vertices[4], this.vertices[7], this.vertices[2], "green"],
-        [this.vertices[5], this.vertices[0], this.vertices[3], this.vertices[6], "orange"],
-        [this.vertices[5], this.vertices[4], this.vertices[1], this.vertices[0], "gray"],
-        [this.vertices[3], this.vertices[2], this.vertices[7], this.vertices[6], "purple"]
+        [this.vertices[0], this.vertices[3], this.vertices[2], this.vertices[1], "red"],
+        [this.vertices[0], this.vertices[1], this.vertices[4], "blue"],
+        [this.vertices[1], this.vertices[2], this.vertices[4], "green"],
+        [this.vertices[2], this.vertices[3], this.vertices[4], "orange"],
+        [this.vertices[0], this.vertices[4], this.vertices[3], "gray"]
     ];
 }

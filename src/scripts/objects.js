@@ -152,10 +152,31 @@ Objects.prototype.checkCollision = function(obj) {
     //     return "Z";
     // }
     // return false;
+    if (Math.abs(this.center.z - obj.center.z) < (this.size/2 + obj.size/2)) {
+        if (obj instanceof Floor) {
+        return true;
+        } else {
+            const right = obj.center.x + obj.size;
+            const left = obj.center.x - obj.size;
+            const top = obj.center.y + obj.size;
+            const bottom = obj.center.y - obj.size;
 
+            for (let i = 0; i < this.vertices.length; i++) {
+                const ele = this.vertices[i];
+                if (ele.x >= left && ele.x <= right && ele.y >= bottom && ele.y <= top) {
+                    return true
+                }
+            }
+        }
+    }
+
+    return false;
 }
 
 Objects.prototype.resolveCollisionZ = function(obj) {
+    if (this instanceof Floor && obj instanceof Floor) {
+        return false;
+    }
     if (obj instanceof Floor) {
         // const correction = obj.center.z - (this.center.z - this.size/2);
         // this.move(0, 0, correction);
@@ -164,6 +185,19 @@ Objects.prototype.resolveCollisionZ = function(obj) {
         // console.log(this);
         // console.log(obj);
         // this.fixed = true;
+        const correction = obj.center.z - (this.center.z - this.size/2);
+        this.move(0, 0, correction);
+        this.velocity.z = 0;
+    } else {
+        if ((this.center.z - this.size/2) > (obj.center.z - obj.size/2)) {
+            const correction = (obj.center.z + obj.size/2) - (this.center.z - this.size/2);
+            this.move(0, 0, correction);
+            this.velocity.z = 0;
+        } else {
+            const correction = (this.center.z + this.size/2) - (obj.center.z - obj.size/2);
+            obj.move(0, 0, correction);
+            obj.velocity.z = 0;
+        }
     }
 }
 
@@ -192,4 +226,8 @@ Objects.prototype.rotate = function () {
     }
     dupe.fixFaces();
     return dupe;
+}
+
+Objects.prototype.jump = function () {
+    this.velocity.z += 15;
 }
