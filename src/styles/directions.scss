@@ -19,6 +19,7 @@ ul.directions {
         width: 100px;
         border-radius: 5px;
         transition: 1000ms;
+        text-transform: uppercase;
     }
     > li > button:hover {
         // background-color: green;
@@ -27,5 +28,11 @@ ul.directions {
         height: 20px;
         cursor: pointer;
         transition: 50ms;
+    }
+
+    > li:last-of-type {
+        display: flex;
+        justify-content: space-between;
+
     }
 }

@@ -249,6 +249,6 @@ Objects.prototype.jump = function (floorHeight) {
     }else {
         yVel = 0.8;
     }
-    this.velocity.z += 5 * (this.center.z - floorHeight)/100 * xVel * yVel;
+    this.velocity.z += 2 + 3 * (this.center.z - floorHeight)/100 * xVel * yVel;
     // this.velocity.z += this.center.x/10;
 }
