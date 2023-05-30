@@ -51,7 +51,7 @@ div.questions-answers {
         border-bottom: 2px solid green;
 
         p {
-            animation: animate 2s linear forwards;
+            animation: animate 1s linear forwards;
             overflow: hidden;
             width: 288px;
             text-align: center;
@@ -67,8 +67,38 @@ div.questions-answers {
         flex-wrap: wrap;
         button {
             display: block;
-            width: 75px;
-            height: 75px;
+            width: 37.5px;
+            height: 37.5px;
+        }
+    }
+
+    div.item-buttons {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: absolute;
+        top: 660px;
+        width: 300px;
+        height: 40px; 
+
+        button {
+            height: 25px;
+            width: 100px;
+            background-color: purple;
+            transition: 500ms;
+            text-transform: uppercase;
+            font-weight: 900;
+            border-radius: 9px;
+        }
+
+        button:hover {
+            cursor: pointer;
+            transform: translateY(-5px);
+            transition: 100ms;
+        }
+
+        button.selected {
+            background-color: darkorchid;
         }
     }
 }

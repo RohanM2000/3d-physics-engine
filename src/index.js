@@ -31,20 +31,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const floor4 = new Floor();
     floor4.move(0, 300, 0);
 
-    const objs = [cube, cube2, cube3, pyramid]
-    const floors = [floor, floor2, floor3, floor4]
+    const objs = []
+    const floors = []
     // const cube2 = new Cube(new Vertex(100,100,100), 100);
 
     // cube.relRotateX(Math.PI/4);
     // render([cube], ctx,  300, 300);
     const camera = new Camera(new Vertex(0, 0, 0), 0);
     const scene = new Scene(camera, objs.concat(floors), background);
-    scene.move(0, 0, -500);
-    scene.move(0, -100, 0);
-    scene.dip(0.2);
     function animate () {
         requestAnimationFrame(animate);
-
+        
         ctx.clearRect(0, 0, 600, 600);
         ctx.fillStyle = "lightblue";
         ctx.fillRect(0, 0, 600, 600);
@@ -106,12 +103,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
             scene.jump();
         }
         // console.log(cube3.rotate(), cube.rotate());
-
+        
         // animate();
         // console.log(cube.center, cube.rotations.multiply(new Matrix([
-        //     [cube.staticCenter.x],
-        //     [cube.staticCenter.y],
-        //     [cube.staticCenter.z]
+            //     [cube.staticCenter.x],
+            //     [cube.staticCenter.y],
+            //     [cube.staticCenter.z]
         // ])), cube.rotate().center, cube.center.multiplyBy(cube.rotations));
         // console.log(cube.faces, cube.rotate().faces, "faces");
         // console.log(cube.vertices, cube.rotate().vertices, "faces");
@@ -123,10 +120,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
     const answers = document.querySelector("div.answers");
     const proj = document.getElementById("proj");
-
+    
     function questionButton(ele) {
         const children = answers.children;
-
+        
         for (let i = 0; i < children.length; i++) {
             children[i].remove();
         }
@@ -135,25 +132,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
     
     const throttleButton = TB.myThrottle(questionButton, 2000);
-
+    
     proj.addEventListener("click", (event)=> {
         const ele = document.createElement("p");
         ele.innerText = "Projections are mappings of 3d objects to a 2d plane. Think of the shadow of a cube. As you rotate that cube, the shadow will change as well. That is the principle that drives 3d engines.";
         // answers.appendChild(ele);
         throttleButton(ele);
     });
-
+    
     const rot = document.getElementById("rot");
-
+    
     rot.addEventListener("click", (event)=> {
         const ele = document.createElement("p");
         ele.innerText = "Rotations work by leveraging trigonometry to change the positions of vertices on each object, and then rendering from the new positions.";
         // answers.appendChild(ele);
         throttleButton(ele);
     });
-
+    
     const what = document.getElementById("what");
-
+    
     what.addEventListener("click", (event)=> {
         const ele = document.createElement("p");
         ele.innerText = "This engine is made with 2d canvas and a simple physics engine made from scratch that considers every object a non-rotational hard body. To read more about the underlying math concepts click me.";
@@ -162,35 +159,82 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     const items = document.querySelector("div.add-items");
-
-    for (let i = 0; i < 16; i++) {
+    items.dataset.Shape = "none";
+    for (let i = 0; i < 64; i++) {
         const tempButton = document.createElement("button");
         tempButton.dataset.Id = i;
-        tempButton.dataset.finish = false;
+        tempButton.dataset.Finish = "false";
         items.appendChild(tempButton);
+        const floor = new Floor();
+        const row = Math.floor(i / 8);
+        const col = i % 8;
+        
+        floor.move(col* 100, row * 100, 0);
+        
+        floors.push(floor);
+        scene.objects.push(floor);
+        
     }
+    scene.move(0, 0, -500);
+    scene.move(0, -100, 0);
+    scene.dip(0.2);
     // console.log(floors);
     function addObj(tempObj) {
         objs.push(tempObj);
         scene.objects.unshift(tempObj);
     }
 
-    const debObj = TB.myDebounce(addObj, 500);
+    const debObj = TB.myDebounce(addObj, 300);
     items.addEventListener("click", (event)=> {
         // console.log(floors);
+        // console.log(event.currentTarget.dataset.Shape);
         const id = event.target.dataset.Id;
         // console.log(id);
-        const row = Math.floor(id / 4);
-        const col = id % 4;
+        const row = Math.floor(id / 8);
+        const col = id % 8;
+        let newObj;
+        if (event.target.dataset.Finish === "true") {
+            alert("Cannot place objects on top of pyramid, will cause unstable structure.");
+        } else {
+            if (event.currentTarget.dataset.Shape === "cube") {
+                newObj = new Cube(new Vertex(-350 + 100 * col, 1100 - 100 * row, 1000), 100);
+                newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
+                newObj.rotations = scene.objects[0].rotations;
+                debObj(newObj);
+            }else if (event.currentTarget.dataset.Shape === "pyramid") {
+                // console.log("PYRMID STUCK");
+                newObj = new Pyramid(new Vertex(-350 + 100 * col, 1100 - 100 * row, 1000), 100);
+                newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
+                newObj.rotations = scene.objects[0].rotations;
+                debObj(newObj);
 
-        const newObj = new Cube(new Vertex(-150 + 100 * col, 700 - 100 * row, 1000), 100);
-        newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
-        newObj.rotations = scene.objects[0].rotations;
+                event.target.dataset.Finish = "true";
+            } else {
+                alert("Please select a shape.");
+            }
+        }
         // objs.push(newObj);
         // scene.objects.unshift(newObj);
         // console.log(newObj);
         // console.log(floors);
-        debObj(newObj);
+    });
+
+
+    const cubeButton = document.getElementById("cube");
+    const pyrButton = document.getElementById("pyramid");
+
+    cubeButton.addEventListener("click", (event)=> {
+        // console.log("cube");
+        items.dataset.Shape = "cube";
+        cubeButton.classList.add("selected");
+        pyrButton.classList.remove("selected");
+    });
+
+    pyrButton.addEventListener("click", (event)=> {
+        // console.log("pyramid");
+        items.dataset.Shape = "pyramid";
+        pyrButton.classList.add("selected");
+        cubeButton.classList.remove("selected");
     });
     animate();
 })

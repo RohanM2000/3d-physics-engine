@@ -89,7 +89,7 @@ h1 {
 
 ul.directions li {
   display: block;
-  padding: 15px;
+  padding: 10px;
   background-color: orange;
   border-bottom: 2px solid green;
   border-left: 2px solid green;
@@ -166,7 +166,7 @@ div.questions-answers div.answers {
   border-bottom: 2px solid green;
 }
 div.questions-answers div.answers p {
-  animation: animate 2s linear forwards;
+  animation: animate 1s linear forwards;
   overflow: hidden;
   width: 288px;
   text-align: center;
@@ -180,8 +180,34 @@ div.questions-answers div.add-items {
 }
 div.questions-answers div.add-items button {
   display: block;
-  width: 75px;
-  height: 75px;
+  width: 37.5px;
+  height: 37.5px;
+}
+div.questions-answers div.item-buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  top: 660px;
+  width: 300px;
+  height: 40px;
+}
+div.questions-answers div.item-buttons button {
+  height: 25px;
+  width: 100px;
+  background-color: purple;
+  transition: 500ms;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-radius: 9px;
+}
+div.questions-answers div.item-buttons button:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  transition: 100ms;
+}
+div.questions-answers div.item-buttons button.selected {
+  background-color: darkorchid;
 }
 
 @keyframes animate {

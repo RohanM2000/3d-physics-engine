@@ -243,6 +243,12 @@ Objects.prototype.jump = function (floorHeight) {
     } else {
         xVel = 2;
     }
-    this.velocity.z += 5 * (this.center.z - floorHeight)/100 * xVel;
+    let yVel;
+    if (this.staticCenter.y > 750) {
+        yVel = 1.2;
+    }else {
+        yVel = 0.8;
+    }
+    this.velocity.z += 5 * (this.center.z - floorHeight)/100 * xVel * yVel;
     // this.velocity.z += this.center.x/10;
 }
