@@ -171,6 +171,18 @@ div.questions-answers div.answers p {
   width: 288px;
   text-align: center;
 }
+div.questions-answers div.add-items {
+  display: flex;
+  position: absolute;
+  top: 358px;
+  width: 300px;
+  flex-wrap: wrap;
+}
+div.questions-answers div.add-items button {
+  display: block;
+  width: 75px;
+  height: 75px;
+}
 
 @keyframes animate {
   0% {

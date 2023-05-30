@@ -161,16 +161,19 @@ Objects.prototype.checkCollision = function(obj) {
         if (obj instanceof Floor) {
         return true;
         } else {
-            const right = obj.center.x + obj.size;
-            const left = obj.center.x - obj.size;
-            const top = obj.center.y + obj.size;
-            const bottom = obj.center.y - obj.size;
+            // const right = obj.center.x + obj.size;
+            // const left = obj.center.x - obj.size;
+            // const top = obj.center.y + obj.size;
+            // const bottom = obj.center.y - obj.size;
 
-            for (let i = 0; i < this.vertices.length; i++) {
-                const ele = this.vertices[i];
-                if (ele.x > left && ele.x < right && ele.y > bottom && ele.y < top) {
-                    return true
-                }
+            // for (let i = 0; i < this.vertices.length; i++) {
+            //     const ele = this.vertices[i];
+            //     if (ele.x > left && ele.x < right && ele.y > bottom && ele.y < top) {
+            //         return true
+            //     }
+            // }
+            if (this.center.x === obj.center.x && this.center.y === obj.center.y) {
+                return true;
             }
         }
     }

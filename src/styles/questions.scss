@@ -58,5 +58,18 @@ div.questions-answers {
         }
 
     }
+
+    div.add-items {
+        display: flex;
+        position: absolute;
+        top: 358px;
+        width: 300px;
+        flex-wrap: wrap;
+        button {
+            display: block;
+            width: 75px;
+            height: 75px;
+        }
+    }
 }
 
