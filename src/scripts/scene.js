@@ -73,8 +73,8 @@ Scene.prototype.fall = function () {
     }
 }
 
-Scene.prototype.jump = function () {
+Scene.prototype.jump = function (floorHeight) {
     for (let i = 0; i < this.objects.length; i++) {
-        this.objects[i].jump();
+        this.objects[i].jump(floorHeight);
     }
 }

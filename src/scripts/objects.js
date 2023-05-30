@@ -152,6 +152,11 @@ Objects.prototype.checkCollision = function(obj) {
     //     return "Z";
     // }
     // return false;
+    if (obj instanceof Floor) {
+        if ((this.center.z - this.size/2) < obj.center.z) {
+            return true;
+        }
+    }
     if (Math.abs(this.center.z - obj.center.z) < (this.size/2 + obj.size/2)) {
         if (obj instanceof Floor) {
         return true;
@@ -163,7 +168,7 @@ Objects.prototype.checkCollision = function(obj) {
 
             for (let i = 0; i < this.vertices.length; i++) {
                 const ele = this.vertices[i];
-                if (ele.x >= left && ele.x <= right && ele.y >= bottom && ele.y <= top) {
+                if (ele.x > left && ele.x < right && ele.y > bottom && ele.y < top) {
                     return true
                 }
             }
@@ -228,6 +233,13 @@ Objects.prototype.rotate = function () {
     return dupe;
 }
 
-Objects.prototype.jump = function () {
-    this.velocity.z += 15;
+Objects.prototype.jump = function (floorHeight) {
+    let xVel;
+    if (this.center.x > 0) {
+        xVel = 3;
+    } else {
+        xVel = 2;
+    }
+    this.velocity.z += 5 * (this.center.z - floorHeight)/100 * xVel;
+    // this.velocity.z += this.center.x/10;
 }

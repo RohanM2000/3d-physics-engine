@@ -1,0 +1,29 @@
+ul.directions {
+    li {
+    display: block;
+    padding: 15px;
+    background-color: orange;
+    border-bottom: 2px solid green;
+    border-left: 2px solid green;
+    border-right: 2px solid green;
+    text-align: center;
+    }
+    li:first-of-type {
+        border-top: 2px solid green;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+    > li > button {
+        background-color: lightgreen;
+        width: 100px;
+        border-radius: 5px;
+    }
+    > li > button:hover {
+        background-color: green;
+        font-weight: 700;
+        width: 120px;
+        height: 20px;
+        cursor: pointer;
+    }
+}

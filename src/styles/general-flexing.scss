@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(to bottom left, purple, black);
+}
+
+section.nav-row {
+    display: flex;
+    justify-content: space-around;
+}
+
+section.content-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+ul.directions {
+    width: 300px;
+}
+
+div.questions-answers {
+    width: 300px;
+}

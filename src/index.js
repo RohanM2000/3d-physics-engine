@@ -10,17 +10,17 @@ import Matrix from "./scripts/matrix.js"
 import Pyramid from "./scripts/pyramid.js"
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 600;
-    canvas.height = 600;
-    document.body.appendChild(canvas);
-
+    // const canvas = document.createElement("canvas");
+    // canvas.width = 600;
+    // canvas.height = 600;
+    // document.body.appendChild(canvas);
+    const canvas = document.getElementById("3d-canvas")
     const ctx = canvas.getContext("2d");
     
     const cube = new Cube(new Vertex(100,700,-100), 100);
     const cube2 = new Cube(new Vertex(-100,700,-200), 100);
     const pyramid = new Pyramid(new Vertex(-100, 700, 400), 100);
-    const cube3 = new Cube(new Vertex(100, 700, 100), 100);
+    const cube3 = new Cube(new Vertex(100, 700, 300), 100);
     const background = new Background();
     const floor = new Floor();
     const floor2 = new Floor();
@@ -33,10 +33,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // render([cube], ctx,  300, 300);
     const camera = new Camera(new Vertex(0, 0, 0), 0);
     const scene = new Scene(camera, [cube, cube2, cube3, pyramid, floor, floor2, floor3], background);
+    scene.move(0, 0, -500);
+    scene.move(0, -100, 0);
+    scene.dip(0.2);
     function animate () {
-        // requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
         ctx.clearRect(0, 0, 600, 600);
+        ctx.fillStyle = "lightblue";
+        ctx.fillRect(0, 0, 600, 600);
         // cube.relRotateX(0.1);
         // cube.relRotateY(0.1);
         // cube.relRotateZ(0.1);
@@ -49,7 +54,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         render([floor, floor2, floor3], ctx, 300, 300, 200);
         render([cube, cube2, cube3, pyramid], ctx, 300, 300, 200);
     }
-    addEventListener("keydown", (event)=>{
+    document.addEventListener("keydown", (event)=>{
         // console.log(cube.center);
         // console.log(cube2.center);
         // console.log(cube.vertices);
@@ -96,7 +101,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
         // console.log(cube3.rotate(), cube.rotate());
 
-        animate();
+        // animate();
         // console.log(cube.center, cube.rotations.multiply(new Matrix([
         //     [cube.staticCenter.x],
         //     [cube.staticCenter.y],
@@ -105,7 +110,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // console.log(cube.faces, cube.rotate().faces, "faces");
         // console.log(cube.vertices, cube.rotate().vertices, "faces");
         // console.log(floor);
-    })
+    });
+    const shake = document.getElementById("shake");
+    shake.addEventListener("click", (event)=> {
+        scene.jump(floor.center.z);
+    });
 
     animate();
 })

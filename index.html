@@ -4,11 +4,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script rel="stylesheet" href="./dist/main.css"></script>
+    <link rel="stylesheet" href="./dist/main.css"></link>
     <script src="./dist/main.js"></script>
     <title>3D/PHYSICS ENGINE</title>
 </head>
 <body>
-    
+    <section class="nav-row">
+        <h1>3D Engine</h1>
+    </section>
+    <section class="content-body">
+        <ul class="directions">
+            <li>
+                Bringing items on screen to extreme angles may cause distortion on the display, due to the limitations of canvas 2d. 
+            </li>
+            <li>
+                W to look up
+            </li>
+            <li>
+                S to look down
+            </li>
+            <li>
+                A to look left
+            </li>
+            <li>
+                D to look right
+            </li>
+            <li>
+                Q to bend left
+            </li>
+            <li>
+                E to bend right
+            </li>
+            <li>
+                UP to move up
+            </li>
+            <li>
+                DOWN to move down
+            </li>
+            <li>
+                LEFT to move left
+            </li>
+            <li>
+                RIGHT to move right
+            </li>
+            <li>
+                <button id="shake">SHAKE!</button>
+            </li>
+        </ul>
+        <canvas id="3d-canvas" width="600" height="600"></canvas>
+        <div class="questions-answers">
+            <ul class="questions">
+                <li>
+                    <button>What is projection and how is it used to make 3d engines?</button>
+                </li>
+                <li>
+                    <button>How do rotations work?</button>
+                </li>
+                <li>
+                    <button>What what what?</button>
+                </li>
+                <textarea></textarea>
+            </ul>
+        </div>
+    </section>
 </body>
 </html>
