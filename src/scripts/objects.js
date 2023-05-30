@@ -235,7 +235,7 @@ Objects.prototype.rotate = function () {
 
 Objects.prototype.jump = function (floorHeight) {
     let xVel;
-    if (this.center.x > 0) {
+    if (this.staticCenter.x > 0) {
         xVel = 3;
     } else {
         xVel = 2;

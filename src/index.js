@@ -8,6 +8,7 @@ import { renderBackground } from "./scripts/render_background.js"
 import Floor from "./scripts/floor.js"
 import Matrix from "./scripts/matrix.js"
 import Pyramid from "./scripts/pyramid.js"
+import * as TB from "./scripts/throttle_debounce.js"
 
 document.addEventListener("DOMContentLoaded", (event) => {
     // const canvas = document.createElement("canvas");
@@ -24,9 +25,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const background = new Background();
     const floor = new Floor();
     const floor2 = new Floor();
-    floor2.move(0, 300, 0);
+    floor2.move(0, 100, 0);
     const floor3 = new Floor();
-    floor3.move(0, 600, 0);
+    floor3.move(0, 200, 0);
     // const cube2 = new Cube(new Vertex(100,100,100), 100);
 
     // cube.relRotateX(Math.PI/4);
@@ -114,6 +115,45 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const shake = document.getElementById("shake");
     shake.addEventListener("click", (event)=> {
         scene.jump(floor.center.z);
+    });
+    const answers = document.querySelector("div.answers");
+    const proj = document.getElementById("proj");
+
+    function questionButton(ele) {
+        const children = answers.children;
+
+        for (let i = 0; i < children.length; i++) {
+            children[i].remove();
+        }
+
+        answers.appendChild(ele);
+    }
+    
+    const throttleButton = TB.myThrottle(questionButton, 2000);
+
+    proj.addEventListener("click", (event)=> {
+        const ele = document.createElement("p");
+        ele.innerText = "Projections are mappings of 3d objects to a 2d plane. Think of the shadow of a cube. As you rotate that cube, the shadow will change as well. That is the principle that drives 3d engines.";
+        // answers.appendChild(ele);
+        throttleButton(ele);
+    });
+
+    const rot = document.getElementById("rot");
+
+    rot.addEventListener("click", (event)=> {
+        const ele = document.createElement("p");
+        ele.innerText = "Rotations work by leveraging trigonometry to change the positions of vertices on each object, and then rendering from the new positions.";
+        // answers.appendChild(ele);
+        throttleButton(ele);
+    });
+
+    const what = document.getElementById("what");
+
+    what.addEventListener("click", (event)=> {
+        const ele = document.createElement("p");
+        ele.innerText = "This engine is made with 2d canvas and a simple physics engine made from scratch that considers every object a non-rotational hard body. To read more about the underlying math concepts click me.";
+        // answers.appendChild(ele);
+        throttleButton(ele);
     });
 
     animate();

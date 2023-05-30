@@ -106,15 +106,83 @@ ul.directions > li > button {
   background-color: lightgreen;
   width: 100px;
   border-radius: 5px;
+  transition: 1000ms;
 }
 ul.directions > li > button:hover {
-  background-color: green;
   font-weight: 700;
   width: 120px;
   height: 20px;
   cursor: pointer;
+  transition: 50ms;
 }
 
 canvas {
-  border: 2px solid green;
+  border: 4px solid green;
+  border-radius: 4px;
+}
+
+div.questions-answers {
+  display: flex;
+  flex-direction: column;
+  background-color: green;
+}
+div.questions-answers ul.questions {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: orange;
+}
+div.questions-answers ul.questions li {
+  display: block;
+  padding: 15px;
+  border-bottom: 2px solid green;
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+}
+div.questions-answers ul.questions li button {
+  background-color: lightblue;
+  border: 0px;
+  border-radius: 5px;
+  width: 250px;
+  height: 30px;
+  transition: 1000ms;
+  margin: 0px;
+}
+div.questions-answers ul.questions li button:hover {
+  cursor: pointer;
+  width: 100%;
+  transition: 50ms;
+}
+div.questions-answers ul.questions li:first-of-type {
+  border-top: 2px solid green;
+}
+div.questions-answers div.answers {
+  display: block;
+  position: absolute;
+  top: 277px;
+  background-color: orange;
+  border-left: 2px solid green;
+  border-right: 2px solid green;
+  border-bottom: 2px solid green;
+}
+div.questions-answers div.answers p {
+  animation: animate 2s linear forwards;
+  overflow: hidden;
+  width: 288px;
+  text-align: center;
+}
+
+@keyframes animate {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  50% {
+    width: 150px;
+    height: 30px;
+  }
+  100% {
+    width: 297px;
+    height: 80px;
+  }
 }

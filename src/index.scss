@@ -3,3 +3,21 @@
 @use './styles/header.scss';
 @use './styles/directions.scss';
 @use './styles/canvas.scss';
+@use './styles/questions.scss';
+
+@keyframes animate {
+    0% {
+        width: 0;
+        height: 0;
+    }
+
+    50% {
+        width: 150px;
+        height: 30px;
+    }
+
+    100% {
+        width: 297px;
+        height: 80px;
+    }
+}
