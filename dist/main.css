@@ -103,18 +103,29 @@ h1 {
 div.profile-links i {
   margin: 15px;
   font-size: 40px;
-  color: lightblue;
+  color: lightgreen;
 }
 
 div.quote {
   width: 400px;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 0px 0px;
   height: 40px;
 }
 div.quote p {
   color: lightblue;
   text-align: center;
+}
+div.quote button {
+  background-color: lightblue;
+  border-radius: 5px;
+  color: green;
+}
+div.quote button:hover {
+  background-color: lightseagreen;
+  font-weight: 700;
 }
 
 ul.directions {
@@ -128,6 +139,7 @@ ul.directions li {
   border-left: 2px solid green;
   border-right: 2px solid green;
   text-align: center;
+  color: green;
 }
 ul.directions li:first-of-type {
   border-top: 2px solid green;
@@ -136,6 +148,7 @@ ul.directions li:first-of-type {
   font-size: 14px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  color: black;
 }
 ul.directions > li > button {
   background-color: lightgreen;
@@ -143,11 +156,11 @@ ul.directions > li > button {
   border-radius: 5px;
   transition: 1000ms;
   text-transform: uppercase;
+  color: purple;
 }
 ul.directions > li > button:hover {
   font-weight: 700;
-  width: 120px;
-  height: 20px;
+  width: 110px;
   cursor: pointer;
   transition: 50ms;
 }
@@ -185,6 +198,7 @@ div.questions-answers ul.questions li {
   border-right: 2px solid green;
 }
 div.questions-answers ul.questions li button {
+  color: green;
   background-color: lightblue;
   border: 0px;
   border-radius: 5px;
@@ -196,6 +210,7 @@ div.questions-answers ul.questions li button {
 div.questions-answers ul.questions li button:hover {
   cursor: pointer;
   width: 100%;
+  font-weight: 700;
   transition: 50ms;
 }
 div.questions-answers ul.questions li:first-of-type {
@@ -218,6 +233,7 @@ div.questions-answers div.answers p {
   white-space: nowrap;
   width: 288px;
   text-align: center;
+  color: green;
 }
 div.questions-answers div.add-items {
   display: flex;
@@ -251,6 +267,7 @@ div.questions-answers div.item-buttons button {
   text-transform: uppercase;
   font-weight: 900;
   border-radius: 9px;
+  color: lightgreen;
 }
 div.questions-answers div.item-buttons button:hover {
   cursor: pointer;

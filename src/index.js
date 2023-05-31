@@ -332,10 +332,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     const quoteBody = document.querySelector("div.quote");
-
+    const button2 = document.createElement("button");
+    button2.innerText = "New Fact!";
+    quoteBody.appendChild(button2);
     async function generateQuote() { 
         try {
-
+            button2.toggleAttribute("hidden");
             const factData = await fetch("https://api.api-ninjas.com/v1/facts", {
                 headers: {
                     "X-Api-Key": "SlsDFWMrQ84X1Z35oeeXnQ==GA3AUhPqul7zmRE4"
@@ -347,14 +349,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 console.log(fact[0]['fact']);
                 
                 quoteBody.children[0].innerText = fact[0]['fact'];
+
+                await setTimeout(()=> quoteBody.children[1].toggleAttribute("hidden"), 3000);
             } else {
                 throw factData;
             }
         } catch (errorResponse) {
             console.log(errorResponse);
+            quoteBody.children[0].innerText = "Cannot load fact."
         }
     }
     generateQuote();
+
+    const throttleQuote = TB.myThrottle(generateQuote, 3000);
+
+    button2.addEventListener("click", throttleQuote);
+
     let ready = true;
     animate(scene);
 })

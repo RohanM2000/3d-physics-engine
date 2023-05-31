@@ -11,17 +11,30 @@ div.profile-links {
     i {
         margin: 15px;
         font-size: 40px;
-        color: lightblue;
+        color: lightgreen;
     }
 }
 
 div.quote {
     width: 400px;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 0px 0px;
     height: 40px;
     p {
         color: lightblue;
         text-align: center;
+    }
+
+    button {
+        background-color: lightblue;
+        border-radius: 5px;
+        color: green;
+    }
+
+    button:hover {
+        background-color: lightseagreen;
+        font-weight: 700;
     }
 }

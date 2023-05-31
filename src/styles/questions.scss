@@ -20,6 +20,7 @@ div.questions-answers {
             border-right: 2px solid green;
 
             button {
+                color: green;
                 background-color: lightblue;
                 border: 0px;
                 border-radius: 5px;
@@ -32,6 +33,7 @@ div.questions-answers {
             button:hover {
                 cursor: pointer;
                 width: 100%;
+                font-weight: 700;
                 // height: 100%;
                 transition: 50ms;
             }
@@ -61,6 +63,7 @@ div.questions-answers {
             white-space: nowrap;
             width: 288px;
             text-align: center;
+            color: green;
         }
 
     }
@@ -99,6 +102,7 @@ div.questions-answers {
             text-transform: uppercase;
             font-weight: 900;
             border-radius: 9px;
+            color: lightgreen;
         }
 
         button:hover {
