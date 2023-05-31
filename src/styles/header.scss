@@ -17,4 +17,10 @@ div.profile-links {
 
 div.quote {
     width: 400px;
+    display: block;
+    padding: 30px 0px;
+    p {
+        color: lightblue;
+        text-align: center;
+    }
 }
