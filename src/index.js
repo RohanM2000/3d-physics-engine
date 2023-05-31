@@ -155,8 +155,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     what.addEventListener("click", (event)=> {
         const ele = document.createElement("p");
-        ele.innerText = "This engine is made with 2d canvas and a simple physics engine made from scratch that considers every object a non-rotational hard body. To read more about the underlying math concepts click me.";
+        ele.innerText = "This engine is made with 2d canvas and a simple physics engine made from scratch that considers every object a non-rotational hard body. To read more about the underlying math concepts ";
         // answers.appendChild(ele);
+        const a = document.createElement("a");
+        a.innerText = "click me.";
+        a.href = "https://en.wikipedia.org/wiki/Rotation_matrix";
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        ele.append(a);
         throttleButton(ele);
     });
 

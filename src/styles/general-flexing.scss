@@ -2,11 +2,12 @@ body {
     display: flex;
     flex-direction: column;
     background-image: linear-gradient(to bottom left, purple, black);
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 section.nav-row {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 section.content-body {
@@ -20,4 +21,16 @@ ul.directions {
 
 div.questions-answers {
     width: 300px;
+}
+
+button {
+    // font-family: 'Nabla', cursive;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+div.profile-links {
+    display: flex;
+    width: 400px;
+    justify-content: flex-end;
+    align-items: center;
 }
