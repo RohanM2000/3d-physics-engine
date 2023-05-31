@@ -208,13 +208,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
         } else {
             if (event.currentTarget.dataset.Shape === "cube") {
                 newObj = new Cube(new Vertex(-350 + 100 * col, 1100 - 100 * row, 1000), 100);
-                newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
+                newObj.move(-scene.camera.position.x, -scene.camera.position.y, -scene.camera.position.z);
                 newObj.rotations = scene.floors[0].rotations;
                 debObj(newObj);
             }else if (event.currentTarget.dataset.Shape === "pyramid") {
                 // console.log("PYRMID STUCK");
                 newObj = new Pyramid(new Vertex(-350 + 100 * col, 1100 - 100 * row, 1000), 100);
-                newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
+                newObj.move(-scene.camera.position.x, -scene.camera.position.y, -scene.camera.position.z);
                 newObj.rotations = scene.floors[0].rotations;
                 debObj(newObj);
 
