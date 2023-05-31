@@ -330,6 +330,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // animate();
         // console.log(localStorage.getItem("scene"));
     });
+
+    const quoteBody = document.querySelector("div.quote");
+
+    async function generateQuote() { 
+        try {
+
+            const factData = await fetch("https://api.api-ninjas.com/v1/facts", {
+                headers: {
+                    "X-Api-Key": "SlsDFWMrQ84X1Z35oeeXnQ==GA3AUhPqul7zmRE4"
+                }
+            });
+            // console.log(factData.json());
+            if (factData.ok) {
+                const fact = await factData.json();
+                console.log(fact[0]['fact']);
+                
+                quoteBody.children[0].innerText = fact[0]['fact'];
+            } else {
+                throw factData;
+            }
+        } catch (errorResponse) {
+            console.log(errorResponse);
+        }
+    }
+    generateQuote();
     let ready = true;
     animate(scene);
 })
