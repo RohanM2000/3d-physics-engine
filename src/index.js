@@ -18,30 +18,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const canvas = document.getElementById("3d-canvas")
     const ctx = canvas.getContext("2d");
     
-    const cube = new Cube(new Vertex(50,500,-100), 100);
-    const cube2 = new Cube(new Vertex(-50,500,-200), 100);
-    const pyramid = new Pyramid(new Vertex(-50, 500, 400), 100);
-    const cube3 = new Cube(new Vertex(50, 500, 300), 100);
+    // const cube = new Cube(new Vertex(50,500,-100), 100);
+    // const cube2 = new Cube(new Vertex(-50,500,-200), 100);
+    // const pyramid = new Pyramid(new Vertex(-50, 500, 400), 100);
+    // const cube3 = new Cube(new Vertex(50, 500, 300), 100);
     const background = new Background();
-    const floor = new Floor();
-    const floor2 = new Floor();
-    floor2.move(0, 100, 0);
-    const floor3 = new Floor();
-    floor3.move(0, 200, 0);
-    const floor4 = new Floor();
-    floor4.move(0, 300, 0);
+    // const floor = new Floor();
+    // const floor2 = new Floor();
+    // floor2.move(0, 100, 0);
+    // const floor3 = new Floor();
+    // floor3.move(0, 200, 0);
+    // const floor4 = new Floor();
+    // floor4.move(0, 300, 0);
 
-    const objs = []
-    const floors = []
     // const cube2 = new Cube(new Vertex(100,100,100), 100);
 
     // cube.relRotateX(Math.PI/4);
     // render([cube], ctx,  300, 300);
-    const camera = new Camera(new Vertex(0, 0, 0), 0);
-    const scene = new Scene(camera, objs.concat(floors), background);
-    function animate () {
-        requestAnimationFrame(animate);
-        
+    let camera = new Camera(new Vertex(0, 0, 0), 0);
+    let scene = new Scene(camera, [], background);
+    function animate (scene) {
+        if (ready) {
+            requestAnimationFrame(()=>animate(scene));
+        }
+        // console.log(scene);
         ctx.clearRect(0, 0, 600, 600);
         ctx.fillStyle = "lightblue";
         ctx.fillRect(0, 0, 600, 600);
@@ -54,8 +54,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // cube.fall();
         // cube3.fall();
         scene.fall();
-        render(floors, ctx, 300, 300, 200);
-        render(objs, ctx, 300, 300, 200);
+        // render(floors, ctx, 300, 300, 200);
+        // render(objs, ctx, 300, 300, 200);
+        scene.render(ctx, 300, 300, 200);
     }
     document.addEventListener("keydown", (event)=>{
         // console.log(cube.center);
@@ -116,7 +117,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
     const shake = document.getElementById("shake");
     shake.addEventListener("click", (event)=> {
-        scene.jump(floor.center.z);
+        scene.jump(scene.floors[0].center.z);
     });
     const answers = document.querySelector("div.answers");
     const proj = document.getElementById("proj");
@@ -171,8 +172,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         
         floor.move(col* 100, row * 100, 0);
         
-        floors.push(floor);
-        scene.objects.push(floor);
+        // floors.push(floor);
+        // scene.objects.push(floor);
+        scene.addObject(floor);
         
     }
     scene.move(0, 0, -500);
@@ -180,8 +182,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     scene.dip(0.2);
     // console.log(floors);
     function addObj(tempObj) {
-        objs.push(tempObj);
-        scene.objects.unshift(tempObj);
+        // objs.push(tempObj);
+        // scene.objects.unshift(tempObj);
+        scene.addObject(tempObj);
     }
 
     const debObj = TB.myDebounce(addObj, 300);
@@ -199,13 +202,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (event.currentTarget.dataset.Shape === "cube") {
                 newObj = new Cube(new Vertex(-350 + 100 * col, 1100 - 100 * row, 1000), 100);
                 newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
-                newObj.rotations = scene.objects[0].rotations;
+                newObj.rotations = scene.floors[0].rotations;
                 debObj(newObj);
             }else if (event.currentTarget.dataset.Shape === "pyramid") {
                 // console.log("PYRMID STUCK");
                 newObj = new Pyramid(new Vertex(-350 + 100 * col, 1100 - 100 * row, 1000), 100);
                 newObj.move(-camera.position.x, -camera.position.y, -camera.position.z);
-                newObj.rotations = scene.objects[0].rotations;
+                newObj.rotations = scene.floors[0].rotations;
                 debObj(newObj);
 
                 event.target.dataset.Finish = "true";
@@ -236,5 +239,63 @@ document.addEventListener("DOMContentLoaded", (event) => {
         pyrButton.classList.add("selected");
         cubeButton.classList.remove("selected");
     });
-    animate();
+
+    const newButton = document.getElementById("new");
+    const saveButton = document.getElementById("save");
+    const loadButton = document.getElementById("load");
+
+    newButton.addEventListener("click", (event)=> {
+        // console.log("new");
+        camera = new Camera(new Vertex(0, 0, 0), 0);
+        scene = new Scene(camera, [], background);
+        for (let i = 0; i < 64; i++) {
+            const floor = new Floor();
+            const row = Math.floor(i / 8);
+            const col = i % 8;
+            
+            floor.move(col* 100, row * 100, 0);
+            
+            // floors.push(floor);
+            // scene.objects.push(floor);
+            scene.addObject(floor);
+        }
+        scene.move(0, 0, -500);
+        scene.move(0, -100, 0);
+        scene.dip(0.2);
+    });
+    saveButton.addEventListener("click", (event)=> {
+        // console.log("save");
+        localStorage.setItem("scene", JSON.stringify(scene));
+    });
+    loadButton.addEventListener("click", (event)=> {
+        // console.log("load");
+        ready = false;
+        // scene = JSON.parse(localStorage.getItem("scene"));
+        const newScene = JSON.parse(localStorage.getItem("scene"));
+        // camera = newScene.camera;
+        // scene = newScene;
+        // camera.position.x = newScene.camera.position.x;
+        // camera.position.y = newScene.camera.position.y;
+        // camera.position.z = newScene.camera.position.z;
+        // camera.zOmega = newScene.camera.zOmega;
+        // camera.zPhi = newScene.camera.zPhi;
+        // camera.zTheta = newScene.camera.zTheta;
+
+        // for (let i = 0; i < newScene.floors.length; i++) {
+        //     const floor = new Floor();
+
+        // }
+
+
+
+        console.log(newScene);
+        // ready = true;
+
+        // animate(scene);
+        // ready = true;
+        // animate();
+        // console.log(localStorage.getItem("scene"));
+    });
+    let ready = true;
+    animate(scene);
 })

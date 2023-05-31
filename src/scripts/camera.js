@@ -1,3 +1,5 @@
+import Vertex from "./vertex";
+
 export default function OrthoCamera (position, zTheta = 0, zPhi = 0, zOmega = 0) {
     this.position = position;
     this.zTheta = zTheta;
@@ -22,3 +24,17 @@ OrthoCamera.prototype.dip = function(zPhi) {
 OrthoCamera.prototype.screw = function(zOmega) {
     this.zOmega += zOmega;
 }
+
+// OrthoCamera.prototype.parse = function(options) {
+//     const result = new OrthoCamera(new Vertex(0, 0, 0));
+
+//     result.position.x = options.position.x;
+//     result.position.y = options.position.y;
+//     result.position.z = options.position.z;
+
+//     result.zTheta = options.zTheta;
+//     result.zPhi = options.zPhi;
+//     result.zOmega = options.zOmega;
+
+//     return result;
+// }
