@@ -6,6 +6,7 @@ export default function Pyramid (center, size) {
     this.velocity = new Vertex(0, 0, 0);
     this.acceleration = new Vertex(0, 0, -CONSTANTS.GRAVITY);
     this.size = size;
+    this.name = "pyramid";
     const d = size / 2;
     // this.relVertices = [
     //     new Vertex(-d, -d, -d),

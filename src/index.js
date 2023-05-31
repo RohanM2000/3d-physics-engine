@@ -9,6 +9,7 @@ import Floor from "./scripts/floor.js"
 import Matrix from "./scripts/matrix.js"
 import Pyramid from "./scripts/pyramid.js"
 import * as TB from "./scripts/throttle_debounce.js"
+import parseScene from "./scripts/parsers.js"
 
 document.addEventListener("DOMContentLoaded", (event) => {
     // const canvas = document.createElement("canvas");
@@ -246,6 +247,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     newButton.addEventListener("click", (event)=> {
         // console.log("new");
+        ready = false;
         camera = new Camera(new Vertex(0, 0, 0), 0);
         scene = new Scene(camera, [], background);
         for (let i = 0; i < 64; i++) {
@@ -262,16 +264,35 @@ document.addEventListener("DOMContentLoaded", (event) => {
         scene.move(0, 0, -500);
         scene.move(0, -100, 0);
         scene.dip(0.2);
+
+        const children = items.children;
+
+        for (let i = 0; i < children.length; i++) {
+            children[i].dataset.Finish = "false";
+        }
+
+        ready = true;
+        animate(scene);
+
     });
     saveButton.addEventListener("click", (event)=> {
         // console.log("save");
+        const finishArray = [];
+
+        const children = items.children;
+
+        for (let i =0; i < children.length; i++) {
+            finishArray.push(children[i].dataset.Finish);
+        }
         localStorage.setItem("scene", JSON.stringify(scene));
+        localStorage.setItem("finishArray", JSON.stringify(finishArray));
     });
     loadButton.addEventListener("click", (event)=> {
         // console.log("load");
         ready = false;
         // scene = JSON.parse(localStorage.getItem("scene"));
         const newScene = JSON.parse(localStorage.getItem("scene"));
+        const finishArray = JSON.parse(localStorage.getItem("finishArray"));
         // camera = newScene.camera;
         // scene = newScene;
         // camera.position.x = newScene.camera.position.x;
@@ -286,9 +307,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         // }
 
+        scene = parseScene(newScene);
+        const children = items.children;
 
+        for (let i = 0; i < children.length; i++) {
+            children[i].dataset.Finish = finishArray[i];
+        }
+        // console.log(scene);
 
-        console.log(newScene);
+        ready = true;
+        animate(scene);
         // ready = true;
 
         // animate(scene);

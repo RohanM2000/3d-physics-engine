@@ -5,6 +5,7 @@ export default function Floor () {
     this.center = new Vertex(-350, 400, -1000);
     this.velocity = new Vertex(0, 0, 0);
     this.size = 0;
+    this.name = "floor";
     this.rotations = new Matrix([
         [1,0,0],
         [0,1,0],

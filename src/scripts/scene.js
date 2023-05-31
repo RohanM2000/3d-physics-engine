@@ -123,20 +123,20 @@ Scene.prototype.render = function (ctx, dx, dy, rendDist) {
     render(this.objects, ctx, dx, dy, rendDist);
 }
 
-Scene.prototype.parse = function (options) {
-    const camera = this.camera.parse(options['camera']);
+// Scene.prototype.parse = function (options) {
+//     const camera = this.camera.parse(options['camera']);
 
-    const result = new Scene(camera, [], this.background);
+//     const result = new Scene(camera, [], this.background);
 
-    // const objects = [];
-    // const floors = [];
+//     // const objects = [];
+//     // const floors = [];
 
-    result.x = new Vertex(options['x']['x'], options['x']['y'], options['x']['z']);
-    result.y = new Vertex(options['y']['x'], options['y']['y'], options['y']['z']);
-    result.z = new Vertex(options['z']['x'], options['z']['y'], options['z']['z']);
+    // result.x = new Vertex(options['x']['x'], options['x']['y'], options['x']['z']);
+    // result.y = new Vertex(options['y']['x'], options['y']['y'], options['y']['z']);
+    // result.z = new Vertex(options['z']['x'], options['z']['y'], options['z']['z']);
 
-    for (let i = 0; i < options['objects'].length; i++) {
-        // const ele = 
-    }
+//     for (let i = 0; i < options['objects'].length; i++) {
+//         // const ele = 
+//     }
 
-}
+// }
