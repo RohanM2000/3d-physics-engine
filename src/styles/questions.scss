@@ -43,6 +43,10 @@ div.questions-answers {
             border-top: 2px solid green;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
+            
+            button {
+                height: 33px;
+            }
         }
 
     
@@ -51,7 +55,7 @@ div.questions-answers {
     div.answers {
         display: block;
         position: absolute;
-        top: 277px;
+        top: 279px;
         background-color: orange;
         border-left: 2px solid green;
         border-right: 2px solid green;
@@ -71,7 +75,7 @@ div.questions-answers {
     div.add-items {
         display: flex;
         position: absolute;
-        top: 358px;
+        top: 361px;
         width: 300px;
         flex-wrap: wrap;
         button {
@@ -90,7 +94,7 @@ div.questions-answers {
         justify-content: space-around;
         align-items: center;
         position: absolute;
-        top: 660px;
+        top: 663px;
         width: 300px;
         height: 40px; 
 

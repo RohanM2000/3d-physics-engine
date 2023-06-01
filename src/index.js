@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         answers.appendChild(ele);
     }
     
-    const throttleButton = TB.myThrottle(questionButton, 2000);
+    const throttleButton = TB.myThrottle(questionButton, 1000);
     
     proj.addEventListener("click", (event)=> {
         const ele = document.createElement("p");
