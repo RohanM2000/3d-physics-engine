@@ -101,9 +101,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if (event.key === "f") {
             scene.move(0, -10, 0);
         }
-        if (event.key === "o") {
-            scene.jump();
-        }
+        // if (event.key === "o") {
+        //     scene.jump();
+        // }
         // console.log(cube3.rotate(), cube.rotate());
         
         // animate();
