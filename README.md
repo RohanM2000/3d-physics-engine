@@ -1,4 +1,6 @@
 # 3D Physics Engine README
+## About
+This project pushes the limits of 2D canvas by projecting the 3D objects into the 2D viewer plane. The physics engine is for handling collisions and gravity, while the render engine is for handling the projections and display.
 
 ## Technologies Used 
 
